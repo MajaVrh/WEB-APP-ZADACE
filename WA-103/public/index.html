@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DZ WA-103</title>
+    <script src="https://unpkg.com/vue@2"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{ prognoza }} <br />
+      Vrijeme: {{ datum }}
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data() {
+          return {
+            prognoza: "",
+            datum: "",
+          };
+        },
+        mounted() {
+          this.getPrognoza();
+          this.getDatum();
+        },
+        methods: {
+          async getPrognoza() {
+            let response = await fetch("http://localhost:8080/prognoza");
+            const rezultat = await response.text();
+            console.log(rezultat);
+            this.prognoza = rezultat;
+          },
+          async getDatum() {
+            let response = await fetch("http://localhost:8080/datum");
+            const rezultat = await response.text();
+            console.log(rezultat);
+            this.datum = rezultat;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

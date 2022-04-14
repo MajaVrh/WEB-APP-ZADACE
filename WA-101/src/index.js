@@ -1,7 +1,9 @@
 import express from "express";
 import routes from "./routes";
+import cors from "cors";
 const app = express();
-const port = 3000;
+app.use(cors());
+const port = 8080;
 // (req,res)
 app.get("/", routes.home);
 app.get("/prognoza", routes.prognoza);
